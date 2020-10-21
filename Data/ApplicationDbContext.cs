@@ -195,6 +195,8 @@ namespace GrantParkCoffeeShop2.Data
 
         }
 
+        public DbSet<GrantParkCoffeeShop2.Models.FeatureOfDay> FeatureOfDay { get; set; }
+
     }
 
 }
