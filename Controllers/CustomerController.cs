@@ -18,13 +18,15 @@ namespace GrantParkCoffeeShop2.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Customer
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    //var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
+        //    //return View(await applicationDbContext.ToListAsync());
+        //    //var products = _context.Products.ToList();
+        //    //return View(products);
+        //}
 
         // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
