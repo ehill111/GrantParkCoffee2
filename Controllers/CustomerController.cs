@@ -20,13 +20,13 @@ namespace GrantParkCoffeeShop2.Controllers
         }
         
         // GET: Customer
-        //public async Task<IActionResult> Index()
-        //{
-        //    //var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
-        //    //return View(await applicationDbContext.ToListAsync());
-        //    //var products = _context.Products.ToList();
-        //    //return View(products);
-        //}
+        public async Task<IActionResult> Index()
+        {
+            //var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
+            //return View(await applicationDbContext.ToListAsync());
+            var products = _context.Products.ToList();
+            return View(products);
+        }
 
         // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -38,7 +38,7 @@ namespace GrantParkCoffeeShop2.Controllers
 
             var customer = await _context.Customers
                 .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -95,7 +95,7 @@ namespace GrantParkCoffeeShop2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CustomerId,IdentityUserId,FirstName,LastName,StreetAddress,City,State,ZipCode,Email,RewardPointsBalance")] Customer customer)
         {
-            if (id != customer.CustomerId)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
@@ -109,7 +109,7 @@ namespace GrantParkCoffeeShop2.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.CustomerId))
+                    if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -134,7 +134,7 @@ namespace GrantParkCoffeeShop2.Controllers
 
             var customer = await _context.Customers
                 .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace GrantParkCoffeeShop2.Controllers
 
         private bool CustomerExists(int id)
         {
-            return _context.Customers.Any(e => e.CustomerId == id);
+            return _context.Customers.Any(e => e.Id == id);
         }
     }
 }

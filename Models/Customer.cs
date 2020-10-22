@@ -11,12 +11,12 @@ namespace GrantParkCoffeeShop2.Models
     public class Customer
     {
         [Key]
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
