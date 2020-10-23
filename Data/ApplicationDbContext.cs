@@ -41,6 +41,22 @@ namespace GrantParkCoffeeShop2.Data
                         NormalizedName = "ADMIN"
                     }
                 );
+            builder.Entity<IdentityRole>()
+                .HasData(
+                    new IdentityRole
+                    {
+                        Name = "Customer",
+                        NormalizedName = "CUSTOMER"
+                    }
+                );
+            builder.Entity<IdentityRole>()
+               .HasData(
+                   new IdentityRole
+                   {
+                       Name = "Owner",
+                       NormalizedName = "OWNER"
+                   }
+               );
 
             builder.Entity<Category>().HasData(
                  new Category
