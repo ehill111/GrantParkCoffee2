@@ -1,70 +1,165 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using GrantParkCoffeeShop2.Helpers;
-//using GrantParkCoffeeShop2.Models;
-//using GrantParkCoffeeShop2.ViewsOfShop;
-//using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using GrantParkCoffeeShop2.Data;
+using GrantParkCoffeeShop2.Models;
 
-                                                         //This is not me. But I can learn from it.
+namespace GrantParkCoffeeShop2.Controllers
+{
+    public class ShoppingCartController : Controller
+    {
+        private readonly ApplicationDbContext _context;
 
-//namespace GrantParkCoffeeShop2.Controllers
-//{
-//    public class ShoppingCartController : Controller
-//    {
-//        public IActionResult Index()
-//        {
-//            var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-//            ViewBag.cart = cart;
-//            ViewBag.total = cart.Sum(item => item.Product.ProductPrice * item.Quantity);
+        public ShoppingCartController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-//            return View();
-//        }
-//        private int CartItem(string id)
-//        {
-//            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-//            for (int i = 0; i < cart.Count; i++)
-//            {
-//                if (cart[i].Product.ProductId.Equals(id))
-//                {
-//                    return i;
-//                }
-//            } 
-//            return -1;
-//        }
-//        public IActionResult Buy(string id)
-//        {
-//            ProductViewModel productViewModel = new ProductViewModel(); 
-//            if(SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart") == null)
-//            {
-//                List<Item> cart = new List<Item>();
-//                cart.Add(new Item { Product = productViewModel.Find(id), Quantity = 1 });
-//                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-//            }
-//            else
-//            {
-//                List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-//                int index = CartItem(id);
-//                if(index != -1)
-//                {
-//                    cart[index].Quantity++;
-//                }
-//                else
-//                {
-//                    cart.Add(new Item { Product = productViewModel.Find(id), Quantity = 1 });
-//                }
-//                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-//            }
-//            return RedirectToAction("Index");
-//        }
-//        public IActionResult Remove(string id)
-//        {
-//            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-//            int index = CartItem(id);
-//            cart.RemoveAt(index);
-//            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-//            return RedirectToAction("Index");
-//        }
-//    }
-//}
+        // GET: ShoppingCart
+        public async Task<IActionResult> Index()
+        {
+            var applicationDbContext = _context.ShoppingCarts.Include(s => s.Order).Include(s => s.Product);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: ShoppingCart/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var shoppingCart = await _context.ShoppingCarts
+                .Include(s => s.Order)
+                .Include(s => s.Product)
+                .FirstOrDefaultAsync(m => m.ShoppingCartId == id);
+            if (shoppingCart == null)
+            {
+                return NotFound();
+            }
+
+            return View(shoppingCart);
+        }
+
+        // GET: ShoppingCart/Create
+        public IActionResult Create()
+        {
+            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
+            return View();
+        }
+
+        // POST: ShoppingCart/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ShoppingCartId,OrderId,ProductId")] ShoppingCart shoppingCart)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(shoppingCart);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId", shoppingCart.OrderId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shoppingCart.ProductId);
+            return View(shoppingCart);
+        }
+
+        // GET: ShoppingCart/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var shoppingCart = await _context.ShoppingCarts.FindAsync(id);
+            if (shoppingCart == null)
+            {
+                return NotFound();
+            }
+            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId", shoppingCart.OrderId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shoppingCart.ProductId);
+            return View(shoppingCart);
+        }
+
+        // POST: ShoppingCart/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ShoppingCartId,OrderId,ProductId")] ShoppingCart shoppingCart)
+        {
+            if (id != shoppingCart.ShoppingCartId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(shoppingCart);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ShoppingCartExists(shoppingCart.ShoppingCartId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId", shoppingCart.OrderId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId", shoppingCart.ProductId);
+            return View(shoppingCart);
+        }
+
+        // GET: ShoppingCart/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var shoppingCart = await _context.ShoppingCarts
+                .Include(s => s.Order)
+                .Include(s => s.Product)
+                .FirstOrDefaultAsync(m => m.ShoppingCartId == id);
+            if (shoppingCart == null)
+            {
+                return NotFound();
+            }
+
+            return View(shoppingCart);
+        }
+
+        // POST: ShoppingCart/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var shoppingCart = await _context.ShoppingCarts.FindAsync(id);
+            _context.ShoppingCarts.Remove(shoppingCart);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ShoppingCartExists(int id)
+        {
+            return _context.ShoppingCarts.Any(e => e.ShoppingCartId == id);
+        }
+    }
+}
