@@ -24,12 +24,12 @@ namespace GrantParkCoffeeShop2
                 if (_claimsPrincipal.IsInRole("Customer"))
                 {
                     context.Result = new RedirectToActionResult("Index",
-                        "Customers", null);
+                        "Customer", null);
                 }
                 else if (_claimsPrincipal.IsInRole("Owner"))
                 {
                     context.Result = new RedirectToActionResult("Index",
-                        "Owners", null);
+                        "Owner", null);
                 }
 
             }

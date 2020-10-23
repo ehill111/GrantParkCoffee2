@@ -4,14 +4,16 @@ using GrantParkCoffeeShop2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GrantParkCoffeeShop2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201023231332_changed-Owner-model")]
+    partial class changedOwnermodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,6 +177,9 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("IdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductSalesHistoryId")
                         .HasColumnType("int");
 
@@ -184,7 +189,7 @@ namespace GrantParkCoffeeShop2.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.HasIndex("ProductSalesHistoryId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Owner");
                 });
@@ -467,22 +472,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c2e67dc2-712b-49b9-ba20-a0dc88e8a69d",
-                            ConcurrencyStamp = "1673649d-b92d-4278-9c82-d833c5649a59",
+                            Id = "b2a59a2c-8d41-499c-ad2d-edb54dc44d71",
+                            ConcurrencyStamp = "5621ab23-165c-4609-9e79-c04a8aa1bded",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f3572fbd-5c78-4626-bc84-f21689d0b1ed",
-                            ConcurrencyStamp = "d001e325-136f-4984-8215-87d8a65afc28",
+                            Id = "7a3e58f0-0ca5-4547-b837-0d5e738a1e8d",
+                            ConcurrencyStamp = "ee88262f-7e9b-4f90-94b7-088442a42443",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "3255e54a-b790-46bd-b333-a5a40c98263b",
-                            ConcurrencyStamp = "ccbe2ca5-0cf2-4e77-93f8-4a0d7f432b4e",
+                            Id = "c96e5d61-589f-4ccd-8158-57fd9cd35f63",
+                            ConcurrencyStamp = "84d2b79b-9763-4d01-8abc-9a2b7bc2842a",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -692,9 +697,9 @@ namespace GrantParkCoffeeShop2.Migrations
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
 
-                    b.HasOne("GrantParkCoffeeShop2.Models.ProductSalesHistory", "ProductSalesHistory")
+                    b.HasOne("GrantParkCoffeeShop2.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("ProductSalesHistoryId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

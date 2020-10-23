@@ -15,5 +15,14 @@ namespace GrantParkCoffeeShop2.Models
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+
+        //[ForeignKey("Customer")]
+        //public int CustomerId { get; set; }
+        //public Customer Customer { get; set; }
+
+        [ForeignKey("ProductSalesHistory")]
+        public int ProductSalesHistoryId { get; set; }
+        public ProductSalesHistory ProductSalesHistory { get; set; }
+       
     }
 }
