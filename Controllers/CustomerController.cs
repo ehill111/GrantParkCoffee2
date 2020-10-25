@@ -23,6 +23,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: Customer
         public async Task<IActionResult> Index()
         {
+
             var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
             //var products = _context.Products.ToList();
@@ -37,8 +38,7 @@ namespace GrantParkCoffeeShop2.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .Include(c => c.IdentityUser)
+            var customer = await _context.Customers.Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
