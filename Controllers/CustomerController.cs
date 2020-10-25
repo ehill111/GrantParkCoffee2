@@ -51,6 +51,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: Customer/Create
         public IActionResult Create()
         {
+            Customer customer = new Customer();
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
