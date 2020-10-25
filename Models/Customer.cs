@@ -15,14 +15,18 @@ namespace GrantParkCoffeeShop2.Models
         [ForeignKey("IdentityUser")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Address")]
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
         public string Email { get; set; }
+        [Display(Name = "Your Reward Points")]
         public int RewardPointsBalance { get; set; }
-
     }
 }

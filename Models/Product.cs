@@ -20,7 +20,7 @@ namespace GrantParkCoffeeShop2.Models
         public bool ProductFeatured { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
-        [Display(Name = "Product On Discount Sale")]
+        [Display(Name = "Product On Sale")]
         public bool ProductOnSale { get; set; }
         [Display(Name = "Reward Eligible")]
         public bool RewardEligible { get; set; }
