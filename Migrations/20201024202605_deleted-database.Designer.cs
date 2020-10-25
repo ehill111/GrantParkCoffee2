@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrantParkCoffeeShop2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201024183050_reconciled-Customer-Names")]
-    partial class reconciledCustomerNames
+    [Migration("20201024202605_deleted-database")]
+    partial class deleteddatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +109,7 @@ namespace GrantParkCoffeeShop2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FeatureOfDay");
+                    b.ToTable("FeaturesOfDay");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Item", b =>
@@ -154,6 +154,9 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("OrderInstructions")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
                     b.Property<bool>("OrderPending")
                         .HasColumnType("bit");
 
@@ -171,7 +174,7 @@ namespace GrantParkCoffeeShop2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Id")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("IdentityUserId")
@@ -182,7 +185,7 @@ namespace GrantParkCoffeeShop2.Migrations
 
                     b.HasKey("OwnerId");
 
-                    b.HasIndex("Id");
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("IdentityUserId");
 
@@ -469,22 +472,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f6138fd3-ddd1-46c2-a2f8-dc5699dceb73",
-                            ConcurrencyStamp = "c9896841-1c65-49c8-bd56-d01dacbbda0e",
+                            Id = "254c321d-befc-49c6-8ead-3c3d327534a7",
+                            ConcurrencyStamp = "84b4952a-95ed-4bc7-a6a4-7eb78d6b600b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6e655791-de7d-4191-acfa-a62ef264a89c",
-                            ConcurrencyStamp = "2e3a4b40-f209-4250-abd9-2889af99c397",
+                            Id = "6fd3f436-6b8b-49e6-8935-055c43999e10",
+                            ConcurrencyStamp = "76dd8167-ae52-4c90-979b-d5368980f816",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "7d32bdb9-ff25-4b62-a6ad-bf21f178711c",
-                            ConcurrencyStamp = "8178f923-3105-4bef-a290-a7acd6215ac8",
+                            Id = "0856c006-11a0-474e-aef4-845890f07765",
+                            ConcurrencyStamp = "83765cbe-3b7b-492e-bf9c-3326aa3866c6",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -686,7 +689,7 @@ namespace GrantParkCoffeeShop2.Migrations
                 {
                     b.HasOne("GrantParkCoffeeShop2.Models.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -15,6 +15,7 @@ namespace GrantParkCoffeeShop2.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         public DateTime OrderDate { get; set; }
+        public int OrderNumber { get; set; }
         public string OrderInstructions { get; set; }
         public double OrderAmountTotal { get; set; }
         public bool OrderPending { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrantParkCoffeeShop2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201023231332_changed-Owner-model")]
-    partial class changedOwnermodel
+    [Migration("20201024225536_on-update-no-action")]
+    partial class onupdatenoaction
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +109,7 @@ namespace GrantParkCoffeeShop2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FeatureOfDay");
+                    b.ToTable("FeaturesOfDay");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Item", b =>
@@ -154,6 +154,9 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("OrderInstructions")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
                     b.Property<bool>("OrderPending")
                         .HasColumnType("bit");
 
@@ -162,36 +165,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("GrantParkCoffeeShop2.Models.Owner", b =>
-                {
-                    b.Property<int>("OwnerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductSalesHistoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OwnerId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Owner");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Product", b =>
@@ -472,22 +445,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b2a59a2c-8d41-499c-ad2d-edb54dc44d71",
-                            ConcurrencyStamp = "5621ab23-165c-4609-9e79-c04a8aa1bded",
+                            Id = "e5f125e2-95bd-46c4-a399-7225467baeec",
+                            ConcurrencyStamp = "611d52e7-c4c6-45f9-9bc1-a09e1382342a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "7a3e58f0-0ca5-4547-b837-0d5e738a1e8d",
-                            ConcurrencyStamp = "ee88262f-7e9b-4f90-94b7-088442a42443",
+                            Id = "2f3ceb44-3b9c-43a5-b1a8-80066297fe06",
+                            ConcurrencyStamp = "c4235811-a5bf-4ee0-b199-494b9e55d4ef",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "c96e5d61-589f-4ccd-8158-57fd9cd35f63",
-                            ConcurrencyStamp = "84d2b79b-9763-4d01-8abc-9a2b7bc2842a",
+                            Id = "28474e9f-3d19-450b-a34c-d6ffa3059797",
+                            ConcurrencyStamp = "4f57d30c-7a6b-4587-945b-b098da68f049",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -681,25 +654,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasOne("GrantParkCoffeeShop2.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GrantParkCoffeeShop2.Models.Owner", b =>
-                {
-                    b.HasOne("GrantParkCoffeeShop2.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("GrantParkCoffeeShop2.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

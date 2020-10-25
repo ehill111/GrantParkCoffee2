@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrantParkCoffeeShop2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201022230814_changed-model")]
-    partial class changedmodel
+    [Migration("20201024211526_DeletedOwnerController")]
+    partial class DeletedOwnerController
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +109,7 @@ namespace GrantParkCoffeeShop2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FeatureOfDay");
+                    b.ToTable("FeaturesOfDay");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Item", b =>
@@ -154,6 +154,9 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("OrderInstructions")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
                     b.Property<bool>("OrderPending")
                         .HasColumnType("bit");
 
@@ -162,23 +165,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("GrantParkCoffeeShop2.Models.Owner", b =>
-                {
-                    b.Property<int>("OwnerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("OwnerId");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.ToTable("Owner");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Product", b =>
@@ -459,10 +445,24 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6747ad86-73f3-4f57-a0aa-a03311cbef82",
-                            ConcurrencyStamp = "68c032e4-5369-44ee-8ab7-873086328678",
+                            Id = "1d2dd799-3c3e-423c-b5e5-1fde36f6c073",
+                            ConcurrencyStamp = "1c4708da-a947-48b7-969c-96d05ae9bbba",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "810343a3-d164-4216-b662-ee41ea9a39b5",
+                            ConcurrencyStamp = "93ee253c-aa50-438c-bc24-3acf7380ef6a",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "fbee53d5-f3e8-404a-9574-ac58c8a37ca6",
+                            ConcurrencyStamp = "390df36d-77be-4f92-9d24-5e1fd4b7ddf9",
+                            Name = "Owner",
+                            NormalizedName = "OWNER"
                         });
                 });
 
@@ -582,12 +582,10 @@ namespace GrantParkCoffeeShop2.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -624,12 +622,10 @@ namespace GrantParkCoffeeShop2.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -660,13 +656,6 @@ namespace GrantParkCoffeeShop2.Migrations
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("GrantParkCoffeeShop2.Models.Owner", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Product", b =>

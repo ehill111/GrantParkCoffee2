@@ -27,7 +27,11 @@ namespace GrantParkCoffeeShop2.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
+        //public DbSet<Owner> Owners { get; set; }
+        public DbSet<FeatureOfDay> FeaturesOfDay { get; set; }
+
         public object Product { get; internal set; }
+        //public object Owner { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -211,9 +215,9 @@ namespace GrantParkCoffeeShop2.Data
 
         }
 
-        public DbSet<GrantParkCoffeeShop2.Models.FeatureOfDay> FeatureOfDay { get; set; }
+        //public DbSet<GrantParkCoffeeShop2.Models.FeatureOfDay> FeatureOfDay { get; set; }
 
-        public DbSet<GrantParkCoffeeShop2.Models.Owner> Owner { get; set; }
+        //public DbSet<GrantParkCoffeeShop2.Models.Owner> Owner { get; set; }
 
     }
 
