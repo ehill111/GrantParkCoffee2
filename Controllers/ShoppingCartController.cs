@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GrantParkCoffeeShop2.Data;
 using GrantParkCoffeeShop2.Models;
+using System.Security.Claims;
 
 namespace GrantParkCoffeeShop2.Controllers
 {
@@ -22,7 +23,10 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ShoppingCarts.Include(s => s.Order).Include(s => s.Product);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var applicationDbContext = _context.ShoppingCarts.Include(s => s.Order)
+                .Include(s => s.Product)
+                .Include(s=> s.Order.Customer.IdentityUser);//This line is not working.
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -49,7 +53,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart/Create
         public IActionResult Create()
         {
-            List<ShoppingCart> shoppingCart = new List<ShoppingCart>();
+            List<Item> item = new List<Item>();
             ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             return View();
