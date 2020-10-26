@@ -440,22 +440,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b486d33d-7509-4b80-b5bd-4f3196d61918",
-                            ConcurrencyStamp = "5f8e9888-137b-403c-9e64-5b407fcfa701",
+                            Id = "47add412-ef7a-4089-bf75-a18b8191921e",
+                            ConcurrencyStamp = "1cadb1dd-7a55-46ca-98a1-4ea27a16d32e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "20bd4be6-f8ee-41c7-9d2b-b120c932562c",
-                            ConcurrencyStamp = "97486b59-8f6d-4204-9927-72ce41afa796",
+                            Id = "1962e9de-e766-41fa-aaed-117430631bb4",
+                            ConcurrencyStamp = "2e2f5337-304c-4a54-9511-64517972bcbf",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e53207b4-7b0c-4dbc-81e9-e3f4a0c55a1f",
-                            ConcurrencyStamp = "d5323f5a-b6e9-4d2a-bbd5-dc22f129240c",
+                            Id = "82e69363-43b3-48ca-b5bd-a97da874950d",
+                            ConcurrencyStamp = "d9543037-e980-46f7-859b-b49be3d481d5",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

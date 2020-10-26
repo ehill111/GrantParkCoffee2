@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GrantParkCoffeeShop2.Migrations
 {
-    public partial class TryingToFixAspNetRolesDatabaseError : Migration
+    public partial class CorrectingASPNetRolesDuplicationError : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -358,9 +358,9 @@ namespace GrantParkCoffeeShop2.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b486d33d-7509-4b80-b5bd-4f3196d61918", "5f8e9888-137b-403c-9e64-5b407fcfa701", "Admin", "ADMIN" },
-                    { "20bd4be6-f8ee-41c7-9d2b-b120c932562c", "97486b59-8f6d-4204-9927-72ce41afa796", "Customer", "CUSTOMER" },
-                    { "e53207b4-7b0c-4dbc-81e9-e3f4a0c55a1f", "d5323f5a-b6e9-4d2a-bbd5-dc22f129240c", "Owner", "OWNER" }
+                    { "47add412-ef7a-4089-bf75-a18b8191921e", "1cadb1dd-7a55-46ca-98a1-4ea27a16d32e", "Admin", "ADMIN" },
+                    { "1962e9de-e766-41fa-aaed-117430631bb4", "2e2f5337-304c-4a54-9511-64517972bcbf", "Customer", "CUSTOMER" },
+                    { "82e69363-43b3-48ca-b5bd-a97da874950d", "d9543037-e980-46f7-859b-b49be3d481d5", "Owner", "OWNER" }
                 });
 
             migrationBuilder.InsertData(
