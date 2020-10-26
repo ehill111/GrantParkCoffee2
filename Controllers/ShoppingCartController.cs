@@ -22,6 +22,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart
         public async Task<IActionResult> Index()
         {
+
             var applicationDbContext = _context.ShoppingCarts.Include(s => s.Order).Include(s => s.Product);
             return View(await applicationDbContext.ToListAsync());
         }
