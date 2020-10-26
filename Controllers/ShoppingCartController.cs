@@ -49,6 +49,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart/Create
         public IActionResult Create()
         {
+            ShoppingCart shoppingCart = new ShoppingCart();
             ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             return View();
