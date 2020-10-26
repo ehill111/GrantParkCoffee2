@@ -23,5 +23,5 @@ namespace GrantParkCoffeeShop2.Models
 
     //When Customer adda a product to their Cart, they are creating a new entry in this table
     //When a Customer chooses to purchase their cart, you find all items from this table with
-    //the CustomerID that matches the curretn customer
+    //the CustomerID that matches the current customer.
 }
