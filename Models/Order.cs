@@ -14,6 +14,8 @@ namespace GrantParkCoffeeShop2.Models
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        [Display(Name = "Order Number")]
+        public int OrderNumber { get; set; }
         [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
         [Display(Name = "Special Instructions")]
