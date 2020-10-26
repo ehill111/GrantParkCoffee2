@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GrantParkCoffeeShop2.Migrations
 {
-    public partial class deleteddatabase : Migration
+    public partial class TryingToFixAspNetRolesDatabaseError : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -241,7 +241,6 @@ namespace GrantParkCoffeeShop2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(nullable: false),
                     OrderDate = table.Column<DateTime>(nullable: false),
-                    OrderNumber = table.Column<int>(nullable: false),
                     OrderInstructions = table.Column<string>(nullable: true),
                     OrderAmountTotal = table.Column<double>(nullable: false),
                     OrderPending = table.Column<bool>(nullable: false),
@@ -354,47 +353,14 @@ namespace GrantParkCoffeeShop2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Owner",
-                columns: table => new
-                {
-                    OwnerId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdentityUserId = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<int>(nullable: false),
-                    ProductSalesHistoryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Owner", x => x.OwnerId);
-                    table.ForeignKey(
-                        name: "FK_Owner_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Owner_AspNetUsers_IdentityUserId",
-                        column: x => x.IdentityUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Owner_ProductSalesHistories_ProductSalesHistoryId",
-                        column: x => x.ProductSalesHistoryId,
-                        principalTable: "ProductSalesHistories",
-                        principalColumn: "ProductSalesHistoryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "254c321d-befc-49c6-8ead-3c3d327534a7", "84b4952a-95ed-4bc7-a6a4-7eb78d6b600b", "Admin", "ADMIN" },
-                    { "6fd3f436-6b8b-49e6-8935-055c43999e10", "76dd8167-ae52-4c90-979b-d5368980f816", "Customer", "CUSTOMER" },
-                    { "0856c006-11a0-474e-aef4-845890f07765", "83765cbe-3b7b-492e-bf9c-3326aa3866c6", "Owner", "OWNER" }
+                    { "b486d33d-7509-4b80-b5bd-4f3196d61918", "5f8e9888-137b-403c-9e64-5b407fcfa701", "Admin", "ADMIN" },
+                    { "20bd4be6-f8ee-41c7-9d2b-b120c932562c", "97486b59-8f6d-4204-9927-72ce41afa796", "Customer", "CUSTOMER" },
+                    { "e53207b4-7b0c-4dbc-81e9-e3f4a0c55a1f", "d5323f5a-b6e9-4d2a-bbd5-dc22f129240c", "Owner", "OWNER" }
                 });
 
             migrationBuilder.InsertData(
@@ -479,21 +445,6 @@ namespace GrantParkCoffeeShop2.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Owner_CustomerId",
-                table: "Owner",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Owner_IdentityUserId",
-                table: "Owner",
-                column: "IdentityUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Owner_ProductSalesHistoryId",
-                table: "Owner",
-                column: "ProductSalesHistoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryID",
                 table: "Products",
                 column: "CategoryID");
@@ -548,7 +499,7 @@ namespace GrantParkCoffeeShop2.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Owner");
+                name: "ProductSalesHistories");
 
             migrationBuilder.DropTable(
                 name: "RoomReservations");
@@ -558,9 +509,6 @@ namespace GrantParkCoffeeShop2.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "ProductSalesHistories");
 
             migrationBuilder.DropTable(
                 name: "Orders");

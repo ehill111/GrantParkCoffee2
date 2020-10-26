@@ -152,9 +152,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("OrderInstructions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
                     b.Property<bool>("OrderPending")
                         .HasColumnType("bit");
 
@@ -443,22 +440,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e5f125e2-95bd-46c4-a399-7225467baeec",
-                            ConcurrencyStamp = "611d52e7-c4c6-45f9-9bc1-a09e1382342a",
+                            Id = "b486d33d-7509-4b80-b5bd-4f3196d61918",
+                            ConcurrencyStamp = "5f8e9888-137b-403c-9e64-5b407fcfa701",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2f3ceb44-3b9c-43a5-b1a8-80066297fe06",
-                            ConcurrencyStamp = "c4235811-a5bf-4ee0-b199-494b9e55d4ef",
+                            Id = "20bd4be6-f8ee-41c7-9d2b-b120c932562c",
+                            ConcurrencyStamp = "97486b59-8f6d-4204-9927-72ce41afa796",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "28474e9f-3d19-450b-a34c-d6ffa3059797",
-                            ConcurrencyStamp = "4f57d30c-7a6b-4587-945b-b098da68f049",
+                            Id = "e53207b4-7b0c-4dbc-81e9-e3f4a0c55a1f",
+                            ConcurrencyStamp = "d5323f5a-b6e9-4d2a-bbd5-dc22f129240c",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

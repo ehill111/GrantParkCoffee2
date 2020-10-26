@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrantParkCoffeeShop2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201024202605_deleted-database")]
-    partial class deleteddatabase
+    [Migration("20201026140211_TryingToFixAspNetRolesDatabaseError")]
+    partial class TryingToFixAspNetRolesDatabaseError
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -154,9 +154,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("OrderInstructions")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
                     b.Property<bool>("OrderPending")
                         .HasColumnType("bit");
 
@@ -165,33 +162,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("GrantParkCoffeeShop2.Models.Owner", b =>
-                {
-                    b.Property<int>("OwnerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdentityUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProductSalesHistoryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OwnerId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("IdentityUserId");
-
-                    b.HasIndex("ProductSalesHistoryId");
-
-                    b.ToTable("Owner");
                 });
 
             modelBuilder.Entity("GrantParkCoffeeShop2.Models.Product", b =>
@@ -472,22 +442,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "254c321d-befc-49c6-8ead-3c3d327534a7",
-                            ConcurrencyStamp = "84b4952a-95ed-4bc7-a6a4-7eb78d6b600b",
+                            Id = "b486d33d-7509-4b80-b5bd-4f3196d61918",
+                            ConcurrencyStamp = "5f8e9888-137b-403c-9e64-5b407fcfa701",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "6fd3f436-6b8b-49e6-8935-055c43999e10",
-                            ConcurrencyStamp = "76dd8167-ae52-4c90-979b-d5368980f816",
+                            Id = "20bd4be6-f8ee-41c7-9d2b-b120c932562c",
+                            ConcurrencyStamp = "97486b59-8f6d-4204-9927-72ce41afa796",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "0856c006-11a0-474e-aef4-845890f07765",
-                            ConcurrencyStamp = "83765cbe-3b7b-492e-bf9c-3326aa3866c6",
+                            Id = "e53207b4-7b0c-4dbc-81e9-e3f4a0c55a1f",
+                            ConcurrencyStamp = "d5323f5a-b6e9-4d2a-bbd5-dc22f129240c",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -681,25 +651,6 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasOne("GrantParkCoffeeShop2.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GrantParkCoffeeShop2.Models.Owner", b =>
-                {
-                    b.HasOne("GrantParkCoffeeShop2.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("GrantParkCoffeeShop2.Models.ProductSalesHistory", "ProductSalesHistory")
-                        .WithMany()
-                        .HasForeignKey("ProductSalesHistoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
