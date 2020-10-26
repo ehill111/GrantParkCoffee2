@@ -22,7 +22,6 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart
         public async Task<IActionResult> Index()
         {
-
             var applicationDbContext = _context.ShoppingCarts.Include(s => s.Order).Include(s => s.Product);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -50,7 +49,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart/Create
         public IActionResult Create()
         {
-            ShoppingCart shoppingCart = new ShoppingCart();
+            List<ShoppingCart> shoppingCart = new List<ShoppingCart>();
             ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             return View();
@@ -63,7 +62,7 @@ namespace GrantParkCoffeeShop2.Controllers
         public async Task<IActionResult> Create([Bind("ShoppingCartId,OrderId,ProductId")] ShoppingCart shoppingCart)
         {
             if (ModelState.IsValid)
-            {
+            {   
                 _context.Add(shoppingCart);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

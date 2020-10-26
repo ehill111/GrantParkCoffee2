@@ -14,11 +14,15 @@ namespace GrantParkCoffeeShop2.Models
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
-        public int OrderNumber { get; set; }
+        [Display(Name = "Special Instructions")]
         public string OrderInstructions { get; set; }
+        [Display(Name = "Order Total")]
         public double OrderAmountTotal { get; set; }
+        [Display(Name = "Order Pending")]
         public bool OrderPending { get; set; }
+        [Display(Name = "Order Fulfilled")]
         public bool OrderFulfilled { get; set; }
     }
 }
