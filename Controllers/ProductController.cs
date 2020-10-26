@@ -26,6 +26,13 @@ namespace GrantParkCoffeeShop2.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        //GET: Menu
+        public async Task<IActionResult> Menu()
+        {
+            var applicationDbContext = _context.Products.Include(p => p.Category);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Product/Details/5
         public async Task<IActionResult> Details(int? id)
         {
