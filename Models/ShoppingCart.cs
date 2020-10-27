@@ -60,7 +60,10 @@ namespace GrantParkCoffeeShop2.Models
                 };
                 _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
-            
+            else
+            {
+                shoppingCartItem.Amount++;
+            }
 
         }
        
