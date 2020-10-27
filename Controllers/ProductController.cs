@@ -26,7 +26,7 @@ namespace GrantParkCoffeeShop2.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        //GET: Menu
+        //GET: Menu (Converted Product list. Tweaked to serve as customer menu.)
         public async Task<IActionResult> Menu()
         {
             var applicationDbContext = _context.Products.Include(p => p.Category);
@@ -43,6 +43,8 @@ namespace GrantParkCoffeeShop2.Controllers
 
             var product = await _context.Products
                 .Include(p => p.Category)
+                //.Include(p => p.ProductName)
+                //.Include(p => p. UnitPrice)
                 .FirstOrDefaultAsync(m => m.ProductId == id);
             if (product == null)
             {
@@ -55,6 +57,7 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: Product/Create
         public IActionResult Create()
         {
+            //Product product = new Product();
             ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID");
             return View();
         }
@@ -89,6 +92,7 @@ namespace GrantParkCoffeeShop2.Controllers
             {
                 return NotFound();
             }
+
             ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryID", "CategoryID", product.CategoryID);
             return View(product);
         }

@@ -26,7 +26,7 @@ namespace GrantParkCoffeeShop2.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var applicationDbContext = _context.ShoppingCarts.Include(s => s.Order)
                 .Include(s => s.Product)
-                .Include(s=> s.Order.Customer.IdentityUser);//This line is not working.
+                .Include(s => s.Order.Customer.IdentityUser);//This line is not working.
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -53,7 +53,9 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart/Create
         public IActionResult Create()
         {
-            List<Item> item = new List<Item>();
+            List<ShoppingCart> shoppingCart = new List<ShoppingCart>();
+            Order order = new Order();
+            Product product = new Product();
             ViewData["OrderId"] = new SelectList(_context.Orders, "OrderId", "OrderId");
             ViewData["ProductId"] = new SelectList(_context.Products, "ProductId", "ProductId");
             return View();

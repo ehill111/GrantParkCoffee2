@@ -80,6 +80,159 @@ namespace GrantParkCoffeeShop2.Data
                 }
                 );
 
+            //builder.Entity<Order>().HasData(
+            //     new Order
+            //     {
+            //         OrderId = 1,
+            //         OrderNumber = 20201000,
+            //         OrderDate = new DateTime(2020-06-05),
+            //         OrderInstructions = "No mustard",
+            //         OrderAmountTotal = 12.73,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //        OrderId = 2,
+            //        OrderNumber = 20201001,
+            //        OrderDate = new DateTime(2020 - 06 - 25),
+            //        OrderInstructions = "",
+            //        OrderAmountTotal = 8.19,
+            //        OrderFulfilled = true,
+            //        OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 3,
+            //         OrderNumber = 20201002,
+            //         OrderDate = new DateTime(2020 - 07 - 05),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 9.16,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 4,
+            //         OrderNumber = 20201003,
+            //         OrderDate = new DateTime(2020 - 07 - 25),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 15.90,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 5,
+            //         OrderNumber = 20201003,
+            //         OrderDate = new DateTime(2020 - 08 - 03),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 22.12,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 6,
+            //         OrderNumber = 20201004,
+            //         OrderDate = new DateTime(2020 - 09 - 19),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 11.36,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 7,
+            //         OrderNumber = 20201005,
+            //         OrderDate = new DateTime(2020 - 09 - 29),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 21.97,
+            //         OrderFulfilled = true,
+            //         OrderPending = false,
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 8,
+            //         OrderNumber = 20201006,
+            //         OrderDate = new DateTime(2020 - 10 - 05),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 12.73,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 9,
+            //         OrderNumber = 20201007,
+            //         OrderDate = new DateTime(2020 - 10 - 08),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 14.09,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 10,
+            //         OrderNumber = 20201008,
+            //         OrderDate = new DateTime(2020 - 10 - 15),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 17.33,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 11,
+            //         OrderNumber = 20201009,
+            //         OrderDate = new DateTime(2020 - 10 - 20),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 8.49,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 12,
+            //         OrderNumber = 20201010,
+            //         OrderDate = new DateTime(2020 - 10 - 22),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 12.90,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 13,
+            //         OrderNumber = 20201011,
+            //         OrderDate = new DateTime(2020 - 10 - 24),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 7.02,
+            //         OrderFulfilled = true,
+            //         OrderPending = false
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 14,
+            //         OrderNumber = 20201012,
+            //         OrderDate = new DateTime(2020 - 10 - 26),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 19.98,
+            //         OrderFulfilled = false,
+            //         OrderPending = true
+            //     },
+            //     new Order
+            //     {
+            //         OrderId = 15,
+            //         OrderNumber = 20201013,
+            //         OrderDate = new DateTime(2020 - 10 - 26),
+            //         OrderInstructions = "",
+            //         OrderAmountTotal = 32.47,
+            //         OrderFulfilled = false,
+            //         OrderPending = true
+            //     }
+            //     ); 
+
             builder.Entity<Product>().HasData(
                     new Product
                     {

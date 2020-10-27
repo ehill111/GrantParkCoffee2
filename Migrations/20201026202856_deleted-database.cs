@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GrantParkCoffeeShop2.Migrations
 {
-    public partial class CorrectingASPNetRolesDuplicationError : Migration
+    public partial class deleteddatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -240,6 +240,7 @@ namespace GrantParkCoffeeShop2.Migrations
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<int>(nullable: false),
+                    OrderNumber = table.Column<int>(nullable: false),
                     OrderDate = table.Column<DateTime>(nullable: false),
                     OrderInstructions = table.Column<string>(nullable: true),
                     OrderAmountTotal = table.Column<double>(nullable: false),
@@ -358,9 +359,9 @@ namespace GrantParkCoffeeShop2.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "47add412-ef7a-4089-bf75-a18b8191921e", "1cadb1dd-7a55-46ca-98a1-4ea27a16d32e", "Admin", "ADMIN" },
-                    { "1962e9de-e766-41fa-aaed-117430631bb4", "2e2f5337-304c-4a54-9511-64517972bcbf", "Customer", "CUSTOMER" },
-                    { "82e69363-43b3-48ca-b5bd-a97da874950d", "d9543037-e980-46f7-859b-b49be3d481d5", "Owner", "OWNER" }
+                    { "12527a1e-f334-4abc-a6ce-db09b39ba7d6", "887a2159-19b8-4088-a84c-7b952c385413", "Admin", "ADMIN" },
+                    { "44085ce0-3fce-4659-9187-ab825e19411c", "792219d8-35a9-4e7a-8954-a6ae00c2b0e7", "Customer", "CUSTOMER" },
+                    { "b381cf47-731a-415d-b67a-f39bfcafdc16", "4399e76c-e982-4ae0-80e9-e88919bad5cf", "Owner", "OWNER" }
                 });
 
             migrationBuilder.InsertData(

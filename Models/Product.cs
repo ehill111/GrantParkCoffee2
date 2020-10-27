@@ -12,6 +12,10 @@ namespace GrantParkCoffeeShop2.Models
         public int ProductId { get; set; }
         [Display(Name = "Product Type")]
         public string ProductType { get; set; }
+
+        [Display(Name = "Buy")]
+        public bool Purchase { get; set; }
+
         [Display(Name = "Product Name")]
         public string ProductName { get; set; }
         [Display(Name = "Product Price")]

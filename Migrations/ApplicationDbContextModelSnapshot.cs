@@ -193,6 +193,9 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.Property<string>("ProductType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Purchase")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("RewardEligible")
                         .HasColumnType("bit");
 
@@ -216,6 +219,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Bacon, Egg, and Cheese Croissant",
                             ProductOnSale = false,
                             ProductType = "Food",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 6.9900000000000002
                         },
@@ -229,6 +233,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Chicken Salad Sandwich",
                             ProductOnSale = false,
                             ProductType = "Food",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 6.9900000000000002
                         },
@@ -242,6 +247,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Creamy Cheese Grits",
                             ProductOnSale = false,
                             ProductType = "Food",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 2.9900000000000002
                         },
@@ -255,6 +261,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Spinach Salad",
                             ProductOnSale = false,
                             ProductType = "Food",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 6.9900000000000002
                         },
@@ -268,6 +275,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Banana Nut Bread",
                             ProductOnSale = false,
                             ProductType = "Dessert",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 2.9900000000000002
                         },
@@ -281,6 +289,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Chocolate Chip Skone",
                             ProductOnSale = false,
                             ProductType = "Dessert",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 2.9900000000000002
                         },
@@ -294,6 +303,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Blueberry Muffin",
                             ProductOnSale = false,
                             ProductType = "Dessert",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 2.9900000000000002
                         },
@@ -307,6 +317,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Coffee",
                             ProductOnSale = false,
                             ProductType = "Beverage",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 2.4900000000000002
                         },
@@ -320,6 +331,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Juice",
                             ProductOnSale = false,
                             ProductType = "Beverage",
+                            Purchase = false,
                             RewardEligible = true,
                             UnitPrice = 2.9900000000000002
                         },
@@ -333,6 +345,7 @@ namespace GrantParkCoffeeShop2.Migrations
                             ProductName = "Water",
                             ProductOnSale = false,
                             ProductType = "Beverage",
+                            Purchase = false,
                             RewardEligible = false,
                             UnitPrice = 1.49
                         });
@@ -443,22 +456,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3c1a3c5c-b70e-48c4-952e-0b45795443fb",
-                            ConcurrencyStamp = "489ffde6-311b-4243-8f21-f9ea901eb402",
+                            Id = "6bb369ba-3b63-4c0b-8af1-9e0f08a614ec",
+                            ConcurrencyStamp = "85f1f8e9-687c-4f92-9af0-d4f30b14b093",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9225960d-b9e9-448a-b5dd-01e597f09bd2",
-                            ConcurrencyStamp = "9b5384e7-4c55-4efa-98fd-282a2f962099",
+                            Id = "31df1fdd-60a6-4cc4-b2fa-0500f70f347c",
+                            ConcurrencyStamp = "cebea452-a6df-4cc8-a6c6-c904679629da",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "6ad9f9b9-1871-448e-8b5b-deba8174c568",
-                            ConcurrencyStamp = "040db096-0b5d-4406-8132-b89376c928bf",
+                            Id = "d6243299-5183-458b-b747-7e855220df84",
+                            ConcurrencyStamp = "cc061df3-52ed-4a39-8eb9-a531a51acfb9",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

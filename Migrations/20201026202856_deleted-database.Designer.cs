@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrantParkCoffeeShop2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201026153420_CorrectingASPNetRolesDuplicationError")]
-    partial class CorrectingASPNetRolesDuplicationError
+    [Migration("20201026202856_deleted-database")]
+    partial class deleteddatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,6 +153,9 @@ namespace GrantParkCoffeeShop2.Migrations
 
                     b.Property<string>("OrderInstructions")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
 
                     b.Property<bool>("OrderPending")
                         .HasColumnType("bit");
@@ -442,22 +445,22 @@ namespace GrantParkCoffeeShop2.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "47add412-ef7a-4089-bf75-a18b8191921e",
-                            ConcurrencyStamp = "1cadb1dd-7a55-46ca-98a1-4ea27a16d32e",
+                            Id = "12527a1e-f334-4abc-a6ce-db09b39ba7d6",
+                            ConcurrencyStamp = "887a2159-19b8-4088-a84c-7b952c385413",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1962e9de-e766-41fa-aaed-117430631bb4",
-                            ConcurrencyStamp = "2e2f5337-304c-4a54-9511-64517972bcbf",
+                            Id = "44085ce0-3fce-4659-9187-ab825e19411c",
+                            ConcurrencyStamp = "792219d8-35a9-4e7a-8954-a6ae00c2b0e7",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "82e69363-43b3-48ca-b5bd-a97da874950d",
-                            ConcurrencyStamp = "d9543037-e980-46f7-859b-b49be3d481d5",
+                            Id = "b381cf47-731a-415d-b67a-f39bfcafdc16",
+                            ConcurrencyStamp = "4399e76c-e982-4ae0-80e9-e88919bad5cf",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
