@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GrantParkCoffeeShop2.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,20 @@ namespace GrantParkCoffeeShop2.Models
 {
     public class ShoppingCart
     {
-        private readonly AppDbContext _appDbContext;
-        private ShoppingCart(AppDbContext appDbContext)
+        private readonly ApplicationDbContext _appDbContext;
+        private AppDbContext context;
+
+        public ShoppingCart(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
+
+        public ShoppingCart(AppDbContext context)
+        {
+            this.context = context;
+        }
+
+        private ShoppingCart(ApplicationDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -41,8 +54,16 @@ namespace GrantParkCoffeeShop2.Models
             session.SetString("CartId", cartId);
 
             return new ShoppingCart(context) { ShoppingCartId = cartId };
+        }
 
-                 
+        public void AddToCart(Product product, int amount)
+        {
+            var shoppingCartItem =
+                _appDbContext.ShoppingCartItems.SingleOrDefault(
+                    s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
+
+
+
         }
        
     }
