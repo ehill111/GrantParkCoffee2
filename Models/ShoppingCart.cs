@@ -10,7 +10,8 @@ namespace GrantParkCoffeeShop2.Models
     public class ShoppingCart
     {
         [Key]
-        public int ShoppingCartId { get; set; }
+        public string ShoppingCartId { get; set; }
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         [ForeignKey("Order")]
         public int OrderId { get; set; }
