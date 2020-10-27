@@ -76,6 +76,13 @@ namespace GrantParkCoffeeShop2.Models
 
             var localAmount = 0;
 
+            if (shoppingCartItem != null)
+            {
+                shoppingCartItem.Amount--;
+                localAmount = shoppingCartItem.Amount;
+            }
+
+
 
 
 
