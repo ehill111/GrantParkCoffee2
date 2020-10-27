@@ -112,7 +112,12 @@ namespace GrantParkCoffeeShop2.Models
             _appDbContext.SaveChanges();
         }
 
-        
+        public decimal GetShoppingCartTotal()
+        {
+            var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Product.UnitPrice * c.Amount).Sum();
+            return (decimal)total;
+        }
 
 
 
