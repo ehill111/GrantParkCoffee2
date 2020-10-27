@@ -108,7 +108,7 @@ namespace GrantParkCoffeeShop2.Models
             var cartItems = _appDbContext
                 .ShoppingCartItems
                 .Where(cart => cart.ShoppingCartId == ShoppingCartId);
-
+            _appDbContext.ShoppingCartItems.RemoveRange(cartItems);
         }
 
 
