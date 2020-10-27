@@ -33,21 +33,21 @@ namespace GrantParkCoffeeShop2.Controllers
         // GET: ShoppingCart/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var shoppingCart = await _context.ShoppingCarts
-                .Include(s => s.Order)
-                .Include(s => s.Product)
-                .FirstOrDefaultAsync(m => m.ShoppingCartId == id);
-            if (shoppingCart == null)
-            {
-                return NotFound();
-            }
+            //var shoppingCart = await _context.ShoppingCarts
+            //    .Include(s => s.Order)
+            //    .Include(s => s.Product)
+            //    .FirstOrDefaultAsync(m => m.ShoppingCartId == id);
+            //if (shoppingCart == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(shoppingCart);
+            return View(/*shoppingCart*/);
         }
 
         // GET: ShoppingCart/Create
@@ -103,7 +103,7 @@ namespace GrantParkCoffeeShop2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ShoppingCartId,OrderId,ProductId")] ShoppingCart shoppingCart)
         {
-            if (id != shoppingCart.ShoppingCartId)
+            //if (id != shoppingCart.ShoppingCartId)
             {
                 return NotFound();
             }
@@ -133,6 +133,11 @@ namespace GrantParkCoffeeShop2.Controllers
             return View(shoppingCart);
         }
 
+        private bool ShoppingCartExists(string shoppingCartId)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: ShoppingCart/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -141,16 +146,16 @@ namespace GrantParkCoffeeShop2.Controllers
                 return NotFound();
             }
 
-            var shoppingCart = await _context.ShoppingCarts
-                .Include(s => s.Order)
-                .Include(s => s.Product)
-                .FirstOrDefaultAsync(m => m.ShoppingCartId == id);
-            if (shoppingCart == null)
-            {
-                return NotFound();
-            }
+            //var shoppingCart = await _context.ShoppingCarts
+            //    .Include(s => s.Order)
+            //    .Include(s => s.Product)
+            //    .FirstOrDefaultAsync(m => m.ShoppingCartId == id);
+            //if (shoppingCart == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(shoppingCart);
+            return View(/*shoppingCart*/);
         }
 
         // POST: ShoppingCart/Delete/5
@@ -164,9 +169,9 @@ namespace GrantParkCoffeeShop2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShoppingCartExists(int id)
-        {
-            return _context.ShoppingCarts.Any(e => e.ShoppingCartId == id);
-        }
+        //private bool ShoppingCartExists(int id)
+        //{
+        //    return _context.ShoppingCarts.Any(e => e.ShoppingCartId == id);
+        //}
     }
 }
