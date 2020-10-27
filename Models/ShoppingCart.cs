@@ -78,17 +78,18 @@ namespace GrantParkCoffeeShop2.Models
 
             if (shoppingCartItem != null)
             {
-                shoppingCartItem.Amount--;
-                localAmount = shoppingCartItem.Amount;
+                if (shoppingCartItem.Amount > 1)
+                {
+                    shoppingCartItem.Amount--;
+                    localAmount = shoppingCartItem.Amount;
+                }
+                else
+                {
+                    _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+                }
             }
-
-
-
-
-
-
+            _appDbContext.SaveChanges();
+            return localAmount;
         }
-
-       
     }
 }
