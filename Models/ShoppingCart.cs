@@ -13,18 +13,6 @@ namespace GrantParkCoffeeShop2.Models
     public class ShoppingCart
     {
         private readonly ApplicationDbContext _appDbContext;
-        private AppDbContext context;
-
-        public ShoppingCart(ApplicationDbContext context)
-        {
-            this.context = context;
-        }
-
-        public ShoppingCart(AppDbContext context)
-        {
-            this.context = context;
-        }
-
         private ShoppingCart(ApplicationDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -48,7 +36,7 @@ namespace GrantParkCoffeeShop2.Models
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?
                 .HttpContext.Session;
 
-            var context = services.GetService<AppDbContext>();
+            var context = services.GetService<ApplicationDbContext>();
             string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 
             session.SetString("CartId", cartId);
@@ -62,7 +50,15 @@ namespace GrantParkCoffeeShop2.Models
                 _appDbContext.ShoppingCartItems.SingleOrDefault(
                     s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
 
-
+            if (shoppingCartItem == null)
+            {
+                shoppingCartItem = new ShoppingCartItem
+                {
+                    ShoppingCartId = ShoppingCartId,
+                    Product = product,
+                    Amount = 1
+                };
+            }
 
         }
        
