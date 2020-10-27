@@ -58,7 +58,9 @@ namespace GrantParkCoffeeShop2.Models
                     Product = product,
                     Amount = 1
                 };
+                _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
+            
 
         }
        
