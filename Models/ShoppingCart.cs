@@ -67,6 +67,14 @@ namespace GrantParkCoffeeShop2.Models
             _appDbContext.SaveChanges();
 
         }
+
+        public int RemoveFromCart(Product product)
+        {
+            var shoppingCartItem =
+                _appDbContext.ShoppingCartItems.SingleOrDefault(
+                    s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
+        }
+
        
     }
 }
