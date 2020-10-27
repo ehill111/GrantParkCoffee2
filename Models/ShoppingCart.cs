@@ -64,6 +64,7 @@ namespace GrantParkCoffeeShop2.Models
             {
                 shoppingCartItem.Amount++;
             }
+            _appDbContext.SaveChanges();
 
         }
        
