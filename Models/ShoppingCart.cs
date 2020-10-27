@@ -73,6 +73,13 @@ namespace GrantParkCoffeeShop2.Models
             var shoppingCartItem =
                 _appDbContext.ShoppingCartItems.SingleOrDefault(
                     s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
+
+            var localAmount = 0;
+
+
+
+
+
         }
 
        
