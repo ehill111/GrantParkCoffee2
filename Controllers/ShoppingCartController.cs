@@ -51,8 +51,9 @@ namespace GrantParkCoffeeShop2.Controllers
             var selectedProduct = Products.FirstOrDefault(p => p.ProductId == productId);
             if (selectedProduct != null)
             {
-
+                _shoppingCart.AddToCart(selectedProduct, 1);
             }
+            return RedirectToAction("Index");
         }
 
     }
