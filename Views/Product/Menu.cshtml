@@ -13,6 +13,7 @@
 <table class="table">
     <thead>
         <tr>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Purchase)
             </th>
@@ -35,24 +36,35 @@
 @foreach (var item in Model) {
         <tr>
             
-            <td>
-                @Html.DisplayFor(modelItem => item.Purchase)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagePath)
-            </td>
-               
-        </tr>
+            <div class="addToCart text-right">
+                <p class="button">
+                    <a class="btn btn-success" id="cartButton"
+                       asp-controller="ShoppingCart"
+                       asp-action="AddToShoppingCart"
+                       asp-route-productId="@Model IEnumerable<GrantParkCoffeeShop2.Models.Product.Id/1>">
+                        Add to Cart
+                    </a>
+                </p>
+            </div>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchase)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImagePath)
+                </td>
+
+</tr>
 }
     </tbody>
 </table>
