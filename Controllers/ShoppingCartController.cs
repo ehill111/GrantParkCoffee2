@@ -56,5 +56,10 @@ namespace GrantParkCoffeeShop2.Controllers
             return RedirectToAction("Index");
         }
 
+        public RedirectToActionResult RemoveFromShoppingCart(int productId)
+        {
+
+        }
+
     }
 }
