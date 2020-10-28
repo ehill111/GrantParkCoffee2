@@ -48,7 +48,7 @@ namespace GrantParkCoffeeShop2.Controllers
 
         public RedirectToActionResult AddToShoppingCart(int productId)
         {
-            var selectedProduct = Products.FirstOrDefault(p => p.ProductId == productId);
+            var selectedProduct = _context.Products.FirstOrDefault(p => p.ProductId == productId);
             if (selectedProduct != null)
             {
                 _shoppingCart.AddToCart(selectedProduct, 1);
@@ -58,7 +58,7 @@ namespace GrantParkCoffeeShop2.Controllers
 
         public RedirectToActionResult RemoveFromShoppingCart(int productId)
         {
-
+            var selectedProduct = _context.Products.FirstOrDefault(p => p.ProductId == productId);
         }
 
     }
