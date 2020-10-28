@@ -49,7 +49,10 @@ namespace GrantParkCoffeeShop2.Controllers
         public RedirectToActionResult AddToShoppingCart(int productId)
         {
             var selectedProduct = Products.FirstOrDefault(p => p.ProductId == productId);
+            if (selectedProduct != null)
+            {
 
+            }
         }
 
     }
