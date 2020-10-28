@@ -13,21 +13,18 @@ namespace GrantParkCoffeeShop2.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly ApplicationDbContext _context;//This may be unnecessary since I'm rebuilding controller from scratch, but will test.
-        private readonly ShoppingCart shoppingCart;
-        public ShoppingCartController()
+        private readonly ShoppingCart _shoppingCart;
+        public ShoppingCartController(ShoppingCart shoppingCart)
         {
-
+            _shoppingCart = shoppingCart;
         }
-        public ShoppingCartController(ApplicationDbContext context)//This may be unnecessary since I'm rebuilding controller from scratch.
-        {
-            _context = context;
-        }
+        
 
         // GET: Controller
         public ViewResult Index()
         {
-            
+            var items = _shoppingCart.GetShoppingCartItems();
+            _shoppingCart.ShoppingCartItems = items;
         }
        
     }
