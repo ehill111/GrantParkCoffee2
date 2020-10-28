@@ -18,14 +18,13 @@ namespace GrantParkCoffeeShop2.Controllers
         {
             _shoppingCart = shoppingCart;
         }
-        
 
         // GET: Controller
         public ViewResult Index()
         {
-            var items = _shoppingCart.GetShoppingCartItems();
+            var items = _shoppingCart.GetShoppingCartItems();//Method to get shopping cart items to view.
             _shoppingCart.ShoppingCartItems = items;
         }
-       
+
     }
 }
