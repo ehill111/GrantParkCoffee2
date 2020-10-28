@@ -22,6 +22,9 @@ namespace GrantParkCoffeeShop2.Controllers
         }
 
         private readonly ShoppingCart _shoppingCart;
+
+        public object Products { get; private set; }
+
         public ShoppingCartController(ShoppingCart shoppingCart)
         {
             _shoppingCart = shoppingCart;
@@ -45,7 +48,8 @@ namespace GrantParkCoffeeShop2.Controllers
 
         public RedirectToActionResult AddToShoppingCart(int productId)
         {
-            var selectedProduct = Products.FirstOrDefault(p => p.ProductId == drinkId);//Need to inject ApplicationDbContext to fix errors.
+            var selectedProduct = Products.FirstOrDefault(p => p.ProductId == productId);
+
         }
 
     }
