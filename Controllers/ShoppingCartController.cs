@@ -13,6 +13,14 @@ namespace GrantParkCoffeeShop2.Controllers
 {
     public class ShoppingCartController : Controller
     {
+
+        private readonly ApplicationDbContext _context;
+
+        public ShoppingCartController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         private readonly ShoppingCart _shoppingCart;
         public ShoppingCartController(ShoppingCart shoppingCart)
         {
