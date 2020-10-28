@@ -25,9 +25,9 @@ namespace GrantParkCoffeeShop2.Controllers
         }
 
         // GET: Controller
-        public IActionResult Index()
+        public ViewResult Index()
         {
-            return View();
+            
         }
        
     }
