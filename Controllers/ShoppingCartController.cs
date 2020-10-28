@@ -27,8 +27,12 @@ namespace GrantParkCoffeeShop2.Controllers
 
             var sCVM = new ShoppingCartViewModel
             {
-
+                ShoppingCart = _shoppingCart,
+                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
             }
+
+            
+
         }
 
     }
