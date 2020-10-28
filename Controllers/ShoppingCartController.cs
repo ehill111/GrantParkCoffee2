@@ -59,6 +59,11 @@ namespace GrantParkCoffeeShop2.Controllers
         public RedirectToActionResult RemoveFromShoppingCart(int productId)
         {
             var selectedProduct = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+            if (selectedProduct!= null)
+            {
+                _shoppingCart.RemoveFromCart(selectedProduct);
+            }
+            return RedirectToAction("Index");
         }
 
     }
