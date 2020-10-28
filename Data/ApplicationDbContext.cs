@@ -30,6 +30,7 @@ namespace GrantParkCoffeeShop2.Data
         //public DbSet<Owner> Owners { get; set; }
         public DbSet<FeatureOfDay> FeaturesOfDay { get; set; }
         public DbSet<ShoppingCartItem> ShoppingCartItems {get; set;}
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         public object Product { get; internal set; }
         //public object Owner { get; internal set; }
