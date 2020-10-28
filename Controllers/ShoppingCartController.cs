@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GrantParkCoffeeShop2.Data;
 using GrantParkCoffeeShop2.Models;
 using System.Security.Claims;
+using GrantParkCoffeeShop2.ViewModels;
 
 namespace GrantParkCoffeeShop2.Controllers
 {
@@ -16,19 +17,20 @@ namespace GrantParkCoffeeShop2.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        public ShoppingCartController(ApplicationDbContext context)
+        public ShoppingCartController(ApplicationDbContext context, ShoppingCart shoppingCart)
         {
             _context = context;
+            _shoppingCart = shoppingCart;
         }
 
         private readonly ShoppingCart _shoppingCart;
 
         public object Products { get; private set; }
 
-        public ShoppingCartController(ShoppingCart shoppingCart)
-        {
-            _shoppingCart = shoppingCart;
-        }
+        //public ShoppingCartController(ShoppingCart shoppingCart)
+        //{
+        //    _shoppingCart = shoppingCart;
+        //}
 
         // GET: Controller
         public ViewResult Index()
