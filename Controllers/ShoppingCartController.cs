@@ -29,9 +29,9 @@ namespace GrantParkCoffeeShop2.Controllers
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
-            }
+            };
 
-            
+            return View(sCVM);
 
         }
 
