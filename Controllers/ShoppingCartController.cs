@@ -24,6 +24,11 @@ namespace GrantParkCoffeeShop2.Controllers
         {
             var items = _shoppingCart.GetShoppingCartItems();//Method to get shopping cart items to view.
             _shoppingCart.ShoppingCartItems = items;
+
+            var sCVM = new ShoppingCartViewModel
+            {
+
+            }
         }
 
     }
