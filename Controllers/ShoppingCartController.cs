@@ -25,7 +25,7 @@ namespace GrantParkCoffeeShop2.Controllers
             var items = _shoppingCart.GetShoppingCartItems();//Method to get shopping cart items to view.
             _shoppingCart.ShoppingCartItems = items;
 
-            var sCVM = new ShoppingCartViewModel
+            var sCVM = new ShoppingCartViewModel//Need to create ViewModel
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
@@ -33,6 +33,11 @@ namespace GrantParkCoffeeShop2.Controllers
 
             return View(sCVM);
 
+        }
+
+        public RedirectToActionResult AddToShoppingCart(int productId)
+        {
+            var selectedProduct = Products.FirstOrDefault(p => p.ProductId == drinkId);//Need to inject ApplicationDbContext to fix errors.
         }
 
     }
