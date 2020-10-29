@@ -34,7 +34,9 @@ namespace GrantParkCoffeeShop2.Data.Repositories
                     OrderId = order.OrderId,
                     UnitPrice = (decimal)item.Product.UnitPrice//Check datatype on UnitPrice
                 };
+                _appDbContext.OrderDetails.Add(orderDetail);
             }
+            _appDbContext.SaveChanges();
         }
     }
 }
