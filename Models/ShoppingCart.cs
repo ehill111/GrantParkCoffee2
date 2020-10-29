@@ -49,13 +49,13 @@ namespace GrantParkCoffeeShop2.Models
         {
             var shoppingCartItem =
                 _appDbContext.ShoppingCartItems.SingleOrDefault(
-                    s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
+                    s => s.Product.ProductId == product.ProductId )/*&& s.ShoppingCartId == ShoppingCartId)*/;
 
             if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem
                 {
-                    ShoppingCartId = ShoppingCartId,
+                    ShoppingCartId = ShoppingCartId,//Where is it created?
                     Product = product,
                     Amount = 1
                 };
