@@ -22,6 +22,19 @@ namespace GrantParkCoffeeShop2.Data.Repositories
         {
             order.OrderPlaced = DateTime.Now;
             _appDbContext.Orders.Add(order);
+
+            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+
+            foreach (var item in shoppingCartItems)
+            {
+                var orderDetail = new OrderDetail()
+                {
+                    Amount = item.Amount,
+                    ProductId = item.Product.ProductId,
+                    OrderId = order.OrderId,
+                    UnitPrice = (decimal)item.Product.UnitPrice//Check datatype on UnitPrice
+                };
+            }
         }
     }
 }
