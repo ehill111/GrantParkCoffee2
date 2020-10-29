@@ -20,11 +20,8 @@ namespace GrantParkCoffeeShop2.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-
+        [Display(Name = "Order Lines")]
         public List<OrderDetail> OrderLines { get; set; }
-
-
-
         [Display(Name = "Order Number")]
         public int OrderNumber { get; set; }
         [Display(Name = "Order Date")]
@@ -37,5 +34,10 @@ namespace GrantParkCoffeeShop2.Models
         public bool OrderPending { get; set; }
         [Display(Name = "Order Fulfilled")]
         public bool OrderFulfilled { get; set; }
+        [Display(Name = "Order Total")]
+        public decimal OrderTotal { get; set; }
+        [Display (Name = "Order Placed")]
+        public DateTime OrderPlaced { get; set; }
+    
     }
 }

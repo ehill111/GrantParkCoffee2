@@ -20,7 +20,8 @@ namespace GrantParkCoffeeShop2.Data.Repositories
 
         public void CreateOrder(Order order)
         {
-            throw new NotImplementedException();
+            order.OrderPlaced = DateTime.Now;
+            _appDbContext.Orders.Add(order);
         }
     }
 }
