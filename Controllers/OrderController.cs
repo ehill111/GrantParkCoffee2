@@ -19,7 +19,7 @@ namespace GrantParkCoffeeShop2.Controllers
             _shoppingCart = shoppingCart;
         }
 
-        public IActionResult Index()
+        public IActionResult Checkout()
         {
             return View();
         }
