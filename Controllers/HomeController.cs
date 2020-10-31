@@ -1,37 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using GrantParkCoffeeShop2.Models;
+using GrantParkCoffeeShop2.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace GrantParkCoffeeShop2.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await _context.Products.Include(p => p.Category)
+                .Where(x => x.Quantity > 0).ToListAsync();
+            return View(products);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Detail(int id)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var product = await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(x => x.Id == id);
+            return View(product);
         }
     }
 }

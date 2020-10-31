@@ -1,0 +1,64 @@
+﻿@model IEnumerable<GrantParkCoffeeShop2.Data.Entities.Order>
+@using GrantParkCoffeeShop2.Data.Entities
+@section Styles {
+    <link rel="stylesheet" href="~/css/user.css" />
+}
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Orders</h2>
+<br />
+@{
+    var orders = Model.GroupBy(x => x.Customer.Id);
+    foreach (var orderGroup in orders)
+    {
+        var customer = Model.FirstOrDefault(x => x.Customer.Id == orderGroup.Key).Customer.User;
+        <h3>@customer.FirstName @customer.LastName</h3>
+        var customersInGroup = orderGroup.OrderByDescending(x => x.Date);
+        foreach (var order in customersInGroup)
+        {
+            <div class="=row">
+                <h5>Order Number: @order.OrderNumber</h5>
+                <h5>Order Date: @order.Date</h5>
+                <h5>Status: @order.Status</h5>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th class="text-right">Price</th>
+                            <th>Quantity</th>
+                            <th class="text-right">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in order.OrderLines)
+                        {
+                            <tr>
+                                <td class="text-left">@line.Product.Name</td>
+                                <td class="text-right">@line.Product.UnitPrice.ToString("c")</td>
+                                <td class="text-center">@line.Quantity</td>
+                                <td class="text-right">
+                                    @((line.Quantity * line.UnitPrice).ToString("c"))
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Total:</td>
+                            <td class="text-right">
+                                @order.OrderLines.Sum(x => (x.UnitPrice * x.Quantity)).ToString("c")
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <br />
+        }
+        <br />
+        <br />
+    }
+}

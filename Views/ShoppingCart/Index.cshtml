@@ -1,30 +1,41 @@
-﻿@model GrantParkCoffeeShop2.ViewModels.ShoppingCartViewModel
+﻿@model GrantParkCoffeeShop2.Models.ShoppingCartModel
 @section Styles {
-        <link rel="stylesheet" href="~/css/custom.css" />
-    }
+    <link rel="stylesheet" href="~/css/user.css" />
+}
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 <div class="=row">
     <h2>Your shopping cart</h2>
+    <h5 style="color:red">@ViewData["Error"]</h5>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Selected Amount</th>
                 <th>Product</th>
                 <th class="text-right">Price</th>
+                <th>Quantity</th>
                 <th class="text-right">Subtotal</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            @foreach (var line in Model.ShoppingCartItems)
             {
                 <tr>
-                    <td class="text-center">@line.Amount</td>
-                    <td class="text-left">@line.Product.ProductName</td>
+                    <td class="text-left">@line.Product.Name</td>
                     <td class="text-right">@line.Product.UnitPrice.ToString("c")</td>
-                    <td class="text-right">@((line.Amount * line.Product.UnitPrice).ToString("c"))
+                    <td class="text-center">
+                        <a class="glyphicon" style="font-size:15px; margin-right:5px; text-decoration:none; border:thin; padding:3px;" href="@Url.Action("Decrement", "ShoppingCart", new{id= line.UniqueId})">-</a>
+                        @line.Quantity
+                        <a style="font-size:15px; margin-left:5px; text-decoration:none; border:thin; padding:3px;" href="@Url.Action("Increment", "ShoppingCart", new{id= line.UniqueId})">+</a>
                     </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="Subtotal"></a></td>
+                    <td class="text-right">
+                        @line.SubTotal.ToString("c")
+                    </td>
+                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" href="@Url.Action("Remove", "ShoppingCart", new{id= line.UniqueId})">Remove</a></td>
                 </tr>
             }
         </tbody>
@@ -32,33 +43,16 @@
             <tr>
                 <td colspan="3" class="text-right">Total:</td>
                 <td class="text-right">
-                    @Model.ShoppingCartTotal.ToString("c")
+                    @Model.TotalAmount.ToString("c")
                 </td>
             </tr>
-        </tfoot>    
+        </tfoot>
     </table>
-
-       
-
-
-      
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    </table>"
-
 </div>
+
+@if (Model.ShoppingCartItems.Count > 0)
+{
+    <div class="cod-md-12">
+        <a href="@Url.Action("Checkout", "ShoppingCart")">Checkout</a>
+    </div>
+}

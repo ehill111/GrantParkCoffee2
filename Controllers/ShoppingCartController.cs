@@ -1,72 +1,149 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using GrantParkCoffeeShop2.Data;
 using GrantParkCoffeeShop2.Models;
-using System.Security.Claims;
-using GrantParkCoffeeShop2.ViewModels;
+using GrantParkCoffeeShop2.Data.Entities;
+using Microsoft.AspNetCore.Http;
+using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace GrantParkCoffeeShop2.Controllers
 {
     public class ShoppingCartController : Controller
     {
-
         private readonly ApplicationDbContext _context;
-
-        public ShoppingCartController(ApplicationDbContext context, ShoppingCart shoppingCart)
+        public ShoppingCartController(ApplicationDbContext context)
         {
             _context = context;
-            _shoppingCart = shoppingCart;
         }
 
-        private readonly ShoppingCart _shoppingCart;
-
-        public object Products { get; private set; }
-
-        //public ShoppingCartController(ShoppingCart shoppingCart)
-        //{
-        //    _shoppingCart = shoppingCart;
-        //}
-
-        // GET: Controller
         public ViewResult Index()
         {
-            var items = _shoppingCart.GetShoppingCartItems();//Method to get shopping cart items to view.
-            _shoppingCart.ShoppingCartItems = items;
-
-            var sCVM = new ShoppingCartViewModel//Need to create ViewModel
-            {
-                ShoppingCart = _shoppingCart,
-                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
-            };
-
-            return View(sCVM);
-
+            var cart = HttpContext.Session.Get<ShoppingCartModel>("Cart");
+            cart ??= new ShoppingCartModel();
+            ViewData["Error"] = TempData["Error"];
+            return View(cart);
         }
 
-        public RedirectToActionResult AddToShoppingCart(int productId)
+        public async Task<RedirectToActionResult> Cart(int id)
         {
-            var selectedProduct = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+            var selectedProduct = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
             if (selectedProduct != null)
             {
-                _shoppingCart.AddToCart(selectedProduct, 1);
+                var cart = HttpContext.Session.Get<ShoppingCartModel>("Cart");
+                cart ??= new ShoppingCartModel();
+                cart.ShoppingCartItems.Add(new ShoppingCartItemModel
+                {
+                    Product = selectedProduct,
+                    Quantity = 1,
+                    UniqueId = Guid.NewGuid().ToString()
+                });
+
+                HttpContext.Session.Set("Cart", cart);
+                HttpContext.Session.SetInt32("CartCount", cart.ShoppingCartItems.Count);
             }
             return RedirectToAction("Index");
         }
 
-        public RedirectToActionResult RemoveFromShoppingCart(int productId)
+        public RedirectToActionResult Remove(string id)
         {
-            var selectedProduct = _context.Products.FirstOrDefault(p => p.ProductId == productId);
-            if (selectedProduct!= null)
-            {
-                _shoppingCart.RemoveFromCart(selectedProduct);
-            }
+            var cart = HttpContext.Session.Get<ShoppingCartModel>("Cart");
+            cart ??= new ShoppingCartModel();
+
+            var product = cart.ShoppingCartItems.FirstOrDefault(x => x.UniqueId == id);
+            cart.ShoppingCartItems.Remove(product);
+            HttpContext.Session.Set("Cart", cart);
+
             return RedirectToAction("Index");
         }
 
+        public RedirectToActionResult Increment(string id)
+        {
+            var cart = HttpContext.Session.Get<ShoppingCartModel>("Cart");
+            cart ??= new ShoppingCartModel();
+
+            var shoppingcartItem = cart.ShoppingCartItems.FirstOrDefault(x => x.UniqueId == id);
+            shoppingcartItem.Quantity++;
+
+            if(shoppingcartItem.Product.Quantity < shoppingcartItem.Quantity)
+            {
+                TempData["Error"] = "Out of stock";
+                return RedirectToAction("Index");
+            }
+
+            HttpContext.Session.Set("Cart", cart);
+
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToActionResult Decrement(string id)
+        {
+            var cart = HttpContext.Session.Get<ShoppingCartModel>("Cart");
+            cart ??= new ShoppingCartModel();
+
+            var shoppingcartItem = cart.ShoppingCartItems.FirstOrDefault(x => x.UniqueId == id);
+            if (shoppingcartItem.Quantity > 1)
+            {
+                shoppingcartItem.Quantity--;
+                HttpContext.Session.Set("Cart", cart);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+        [Authorize(Roles = RoleConstants.USER)]
+        public async Task<IActionResult> Checkout()
+        {
+            var email = HttpContext.User.Identity.Name;
+            var customer = _context.Customers.Include(x => x.User).FirstOrDefault(x => x.Email == email);
+            var order = new Order
+            {
+                Customer = customer,
+                Date = DateTime.Now,
+                OrderNumber = Guid.NewGuid().ToString(),
+                Status = OrderStatus.Placed
+            };
+
+            var cart = HttpContext.Session.Get<ShoppingCartModel>("Cart");
+            cart ??= new ShoppingCartModel();
+
+            for (int i = 0; i < cart.ShoppingCartItems.Count; i++)
+            {
+                var line = cart.ShoppingCartItems[i];
+                var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == line.Product.Id);
+                var orderDetail = new OrderDetail
+                {
+                    Order = order,
+                    Product = product,
+                    Quantity = line.Quantity,
+                    UnitPrice = line.Product.UnitPrice
+                };
+
+                order.OrderLines.Add(orderDetail);
+                
+                if(product.Quantity - orderDetail.Quantity < 0)
+                {
+                    TempData["Error"] = $"{product.Name} has {product.Quantity} in stock";
+                    return RedirectToAction("Index");
+                }
+
+                product.Quantity -= orderDetail.Quantity;
+            }
+
+            customer.RewardPointsBalance++;
+            _context.Update(customer);
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            HttpContext.Session.Remove("Cart");
+            HttpContext.Session.Remove("CartCount");
+            HttpContext.Session.SetInt32("RewardPoints", customer.RewardPointsBalance);
+
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<GrantParkCoffeeShop2.Controllers.MonthlySalesBreakdownModel>
+@using GrantParkCoffeeShop2.Controllers
+@section Styles {
+    <link rel="stylesheet" href="~/css/user.css" />
+}
+
+@{
+    ViewData["Title"] = "MonthlySalesBreakdown";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h1>Monthly Sales Breakdown by @ViewData["SortOrder"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="cod-md-4">
+            <a href="@Url.Action("ByProduct", "Admin")">By Product</a>
+        </div>
+        <div class="offset-2 cod-md-4">
+            <a href="@Url.Action("BySales", "Admin")">By Sales</a>
+        </div>
+    </div>
+</div>
+
+@foreach (var monlthlySales in Model)
+{
+    <h2>@monlthlySales.Month</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th class="text-right">Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var sortedmonthlysales = ViewData["SortOrder"].ToString() == MonthlySalesBreakdownModel.ByProduct ?
+                                    monlthlySales.Sales.OrderByDescending(x => x.Quantity) :
+                                    monlthlySales.Sales.OrderByDescending(x => x.TotalAmount);
+                foreach (var sales in sortedmonthlysales)
+                {
+                    <tr>
+                        <td class="text-left">@sales.ProductName</td>
+                        <td class="text-center">@sales.Quantity</td>
+                        <td class="text-right">@sales.TotalAmount.ToString("c")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+}
+

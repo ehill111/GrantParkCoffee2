@@ -1,22 +1,99 @@
-﻿@section Styles {
-    <link rel="stylesheet" href="~/css/custom.css" />
+﻿@model IEnumerable<GrantParkCoffeeShop2.Data.Entities.Product>
+@section Styles {
+    <link rel="stylesheet" href="~/css/user.css" />
 }
 
-@{ ViewData["Title"] = "Home Page"; }
-<div class="container">
-    <div class="row">
-        <div class="text-center">
-            <h1 class="display-4">Welcome to the World of Great Coffee and Fresh, Delicious Food</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-            <img src="~/coffeeCupLogo.png" alt="cup of hot coffee" />
-        </div>
-    </div>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 
+<div class="row" style="margin: 20px 0; background: #fff;">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4" style="padding: 0; margin: 0;">
+            <a href="@Url.Action("Detail", "Home", new{id= product.Id})">
+                <div class="col-sm-4" style="margin: 0; padding: 0;">
+                    <div class="thumbnail" style="padding: 0; margin: 0; border-radius: 0;">
+                        <img src="~/images/coffee.jpg" alt="@product.Name" class="img-responsive" style="height: 130px;" />
+                        <div class="caption" style="text-align: center; font-size: 1.2em;">
+                            <span style="font-weight: bold">@product.Name</span><br />
+                            <span>$ @product.UnitPrice</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <div class="cod-md-12">
+                <a href="@Url.Action("cart", "ShoppingCart", new{id= product.Id})">Add to Cart</a>
+            </div>
+        </div>
+    }
 </div>
 
-
-
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Featured)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RewardEligible)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Featured)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RewardEligible)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
