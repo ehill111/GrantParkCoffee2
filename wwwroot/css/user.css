@@ -1,5 +1,16 @@
 ﻿.body {
-    background-color: antiquewhite;
+    background-color:mintcream;
+}
+.header-background {
+    color: brown;
+}
+
+.img-background {
+    background-image: url("/images/coffeeCupLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 500em;
 }
 .test {
     color: brown;
