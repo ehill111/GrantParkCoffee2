@@ -24,10 +24,10 @@
             <a href="@Url.Action("Detail", "Home", new{id= product.Id})">
                 <div class="col-sm-4" style="margin: 0; padding: 0;">
                     <div class="thumbnail" style="padding: 0; margin: 0; border-radius: 0;">
-                        <img src="~/images/coffee.jpg" alt="@product.Name" class="img-responsive" style="height: 130px;" />
+                        <img src="@product.Image" alt="@product.Name" class="img-responsive" style="height: 130px;" />
                         <div class="caption" style="text-align: center; font-size: 1.2em;">
                             <span style="font-weight: bold">@product.Name</span><br />
-                            <span>$ @product.UnitPrice</span>
+                            <span>$@product.UnitPrice</span>
                         </div>
                     </div>
                 </div>

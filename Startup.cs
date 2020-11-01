@@ -149,7 +149,7 @@ namespace GrantParkCoffeeShop2
                 {
                     Name = "Bacon, Egg, and Cheese Croissant",
                     Description = "Available with pork or turkey bacon.",
-                    Image = "baconEggCheese.jpg",
+                    Image = "/images/baconEggCheese.jpg",
                     UnitPrice = 6.99,
                     Featured = false,
                     RewardEligible = true,
@@ -160,7 +160,7 @@ namespace GrantParkCoffeeShop2
                    {
                        Name = "Chicken Salad Sandwich",
                        Description = "Tasty chicken piled high on wheat, rye, or white bread, with lettuce and tomato.",
-                       Image = "chickenSalad.jpg",
+                       Image = "/images/chickenSalad.jpg",
                        UnitPrice = 6.99,
                        Featured = true,
                        Category = food,
@@ -170,7 +170,7 @@ namespace GrantParkCoffeeShop2
                     {
                         Name = "Creamy Cheese Grits",
                         Description = "Don't get mad at Momma and Grandmama because their grits aren't as tasty as ours. They're only human!",
-                        Image = "grits.jpg",
+                        Image = "/images/grits.jpg",
                         UnitPrice = 2.99,
                         Featured = false,
                         RewardEligible = true,
@@ -181,7 +181,7 @@ namespace GrantParkCoffeeShop2
                      {
                          Name = "Spinach Salad",
                          Description = "Spinach, apples, red onion, toasted walnut halves, dried cranberries, goat cheese, and our special dressing.",
-                         Image = "salad.jpg",
+                         Image = "/images/salad.jpg",
                          UnitPrice = 6.99,
                          Featured = false,
                          RewardEligible = true,
@@ -192,7 +192,7 @@ namespace GrantParkCoffeeShop2
                       {
                           Name = "Banana Nut Bread",
                           Description = "Would you like a little warm butter on that?",
-                          Image = "bananaNutBread.jpg",
+                          Image = "/images/bananaNutBread.jpg",
                           UnitPrice = 2.99,
                           Featured = false,
                           RewardEligible = true,
@@ -203,7 +203,7 @@ namespace GrantParkCoffeeShop2
                        {
                            Name = "Chocolate Chip Skone",
                            Description = "Chocolate. Chip. Skone. What else is there to say? What? Fresh? Fresh is who we are!",
-                           Image = "skone.jpg",
+                           Image = "/images/skone.jpg",
                            UnitPrice = 2.99,
                            Featured = false,
                            RewardEligible = true,
@@ -214,7 +214,7 @@ namespace GrantParkCoffeeShop2
                         {
                             Name = "Blueberry Muffin",
                             Description = "Oh. My. Goodness. GOOD!",
-                            Image = "muffin.jpg",
+                            Image = "/images/muffin.jpg",
                             UnitPrice = 2.99,
                             Featured = false,
                             RewardEligible = true,
@@ -225,7 +225,7 @@ namespace GrantParkCoffeeShop2
                          {
                              Name = "Coffee",
                              Description = "Every delicious cup of coffee you purchase helps support a local shelter for victims of domestic abuse.",
-                             Image = "coffeeCupLogo.png",
+                             Image = "/images/coffeeCupLogo.png",
                              UnitPrice = 2.49,
                              Featured = false,
                              RewardEligible = true,
@@ -236,7 +236,7 @@ namespace GrantParkCoffeeShop2
                          {
                              Name = "Juice",
                              Description = "Cranberry. Orange. Apple. Just say the word.",
-                             Image = "juice.jpg",
+                             Image = "/images/juice.jpg",
                              UnitPrice = 2.99,
                              Featured = false,
                              RewardEligible = true,
@@ -247,7 +247,7 @@ namespace GrantParkCoffeeShop2
                           {
                               Name = "Water",
                               Description = "Twelve ounces of life. And you can have it room temperature or cool!",
-                              Image = "water.jpg",
+                              Image = "/images/water.jpg",
                               UnitPrice = 1.49,
                               Featured = false,
                               RewardEligible = false,
