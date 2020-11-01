@@ -1,14 +1,23 @@
-﻿@model Order 
+﻿@model IEnumerable<GrantParkCoffeeShop2.Data.Entities.Order>
+@using GrantParkCoffeeShop2.Data.Entities
+@section Styles {
+    <link rel="stylesheet" href="~/css/user.css" />
+}
+    @{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<div class="=row" >
+
+@*<div class="=row">
 
     <form>
         <div>
-            <input asp-for="LastName"/>
+            <input asp-for="LastName" />
         </div>
         <div>
-            <input asp-for="FirstName"/>
+            <input asp-for="FirstName" />
         </div>
     </form>
 
-</div>
+</div>*@
