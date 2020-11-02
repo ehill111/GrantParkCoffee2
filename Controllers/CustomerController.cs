@@ -59,6 +59,12 @@ namespace GrantParkCoffeeShop2.Controllers
                 return View();
             }
 
+            reservation.Customer = customer;
+            _context.RoomReservations.Add(reservation);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("RoomReservations");
+
         }
     }
 
