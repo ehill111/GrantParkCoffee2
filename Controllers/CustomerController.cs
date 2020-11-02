@@ -47,6 +47,12 @@ namespace GrantParkCoffeeShop2.Controllers
             if (reservation.Date == default) return View();
 
             var currentDate = new DateTime();
+            var email = User.Identity.Name;
+            var customer = await _context.Customers.FirstOrDefaultAsync(x => x.Email == email);
+            var roomReservation = await _context.RoomReservations
+                .Include(x => x.Customer).FirstOrDefaultAsync(x =>
+                x.Customer.Email == email && x.Date >= currentDate);
+
         }
     }
 
