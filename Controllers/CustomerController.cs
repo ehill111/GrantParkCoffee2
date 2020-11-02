@@ -19,7 +19,21 @@ namespace GrantParkCoffeeShop2.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> RoomReservations()
+        {
+            var currentDate = new DateTime();
+            var email = User.Identity.Name;
+            var roomReservations = await _context.RoomReservations.Include(x => x.Customer)
+                .Where(x => x.Customer.Email == email)
+                .Select(x =>
+            new RoomReservationModel
+            {
+                Date = x.Date.ToLongDateString(),
+                Status = currentDate.Ticks > x.Date.Ticks ? "Passed" : "Current"
+            }).ToListAsync();
 
+            return View(roomReservations);
+        }
     }
 
 }
