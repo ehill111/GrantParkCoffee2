@@ -1,4 +1,7 @@
 ﻿@model GrantParkCoffeeShop2.Data.Entities.RoomReservation
+@section Styles {
+    <link rel="stylesheet" href="~/css/user.css" />
+}
 
 @{
     ViewData["Title"] = "MakeRoomReservations";
@@ -11,7 +14,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="MakeRoomReservation">
-            <h6>@ViewData["Error"]</h6>
+            <h6 style="color:red;">@ViewData["Error"]</h6>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />

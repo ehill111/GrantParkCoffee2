@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace GrantParkCoffeeShop2.Data.Entities
 {

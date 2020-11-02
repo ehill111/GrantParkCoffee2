@@ -19,9 +19,11 @@ namespace GrantParkCoffeeShop2.Controllers
         {
             _context = context;
         }
+
         public async Task<IActionResult> RoomReservations()
         {
             var currentDate = new DateTime();
+
             var email = User.Identity.Name;
             var roomReservations = await _context.RoomReservations.Include(x => x.Customer)
                 .Where(x => x.Customer.Email == email)
@@ -49,13 +51,12 @@ namespace GrantParkCoffeeShop2.Controllers
             var currentDate = new DateTime();
             var email = User.Identity.Name;
             var customer = await _context.Customers.FirstOrDefaultAsync(x => x.Email == email);
-            var roomReservation = await _context.RoomReservations
-                .Include(x => x.Customer).FirstOrDefaultAsync(x =>
-                x.Customer.Email == email && x.Date >= currentDate);
+            var roomReservation = await _context.RoomReservations.Include(x => x.Customer).FirstOrDefaultAsync(x =>
+            x.Customer.Email == email && x.Date >= currentDate);
 
             if(roomReservation != null)
             {
-                ViewData["Error"] = "You already have a reservation.";
+                ViewData["Error"] = "You have a reservation already";
                 return View();
             }
 
@@ -64,8 +65,6 @@ namespace GrantParkCoffeeShop2.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("RoomReservations");
-
         }
     }
-
 }

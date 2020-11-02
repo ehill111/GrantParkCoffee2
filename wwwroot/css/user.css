@@ -1,3 +1,35 @@
 ﻿body {
 
 }
+customFont {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.navbarColor {
+    color: darkred;
+}
+.bkground-img {
+    background-image: url("baconEggCheese.jpg");
+    background-size: cover;
+}
+
+.jumbo-font {
+    color: darkred;
+    font-size: 3em;
+}
+.header-color {
+    color: darkred;
+}
+.navbar-brand-color  {
+    color: darkred;
+}
+.navbar-nav-color {
+    color: darkred;
+}
+.cover {
+    object-fit: cover;
+    overflow: hidden;
+    height: 200px;
+}
+.carousel-size {
+    height: 400px;
+} 

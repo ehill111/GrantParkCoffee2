@@ -55,6 +55,7 @@ namespace GrantParkCoffeeShop2.Controllers
             var product = cart.ShoppingCartItems.FirstOrDefault(x => x.UniqueId == id);
             cart.ShoppingCartItems.Remove(product);
             HttpContext.Session.Set("Cart", cart);
+            HttpContext.Session.SetInt32("CartCount", cart.ShoppingCartItems.Count);
 
             return RedirectToAction("Index");
         }

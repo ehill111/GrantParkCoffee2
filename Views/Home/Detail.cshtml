@@ -8,15 +8,15 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="container" style="background: #fff; padding: 10px; margin: 10px 0;">
+<div class="container" style="background: #fff; padding: 10px; margin: 10px 0; border:1px solid lightgray; border-radius:7px;">
     <div class="col-md-4 col-md-offset-1">
-        <img src=@Model.Image  @*"~/images/coffee.jpg"*@ class="img-responsive" style="width: 200px; height: 300px;" />
+        <img src="~/images/@Model.Image" class="img-responsive" style="width: 400px; height: 400px;" />
     </div>
     <div class="col-md-7">
         <h4>@Model.Name</h4>
         <span>Category: @Model.Category.Name</span>
         <hr />
-        <h4>$@Model.UnitPrice</h4>
+        <h4>@Model.UnitPrice.ToString("c")</h4>
     </div>
 </div>
 
@@ -27,6 +27,6 @@
     </div>
 </div>
 
-<div class="cod-md-12">
-    <a href="@Url.Action("cart", "ShoppingCart", new{id= Model.Id})">Add to Cart</a>
+<div class="caption" style="text-align: center; font-size: 1.2em; margin-bottom:10px;">
+    <a class="btn btn-primary"  href="@Url.Action("cart", "ShoppingCart", new{id= Model.Id})">Add to Cart</a>
 </div>
