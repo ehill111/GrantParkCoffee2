@@ -53,6 +53,12 @@ namespace GrantParkCoffeeShop2.Controllers
                 .Include(x => x.Customer).FirstOrDefaultAsync(x =>
                 x.Customer.Email == email && x.Date >= currentDate);
 
+            if(roomReservation != null)
+            {
+                ViewData["Error"] = "You already have a reservation.";
+                return View();
+            }
+
         }
     }
 
