@@ -40,6 +40,14 @@ namespace GrantParkCoffeeShop2.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> MakeRoomReservation(RoomReservation reservation)
+        {
+            if (reservation.Date == default) return View();
+
+            var currentDate = new DateTime();
+        }
     }
 
 }
