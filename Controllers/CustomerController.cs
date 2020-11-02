@@ -34,6 +34,12 @@ namespace GrantParkCoffeeShop2.Controllers
 
             return View(roomReservations);
         }
+
+        [HttpGet]
+        public IActionResult MakeRoomReservation()
+        {
+            return View();
+        }
     }
 
 }
