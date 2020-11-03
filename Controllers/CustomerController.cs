@@ -66,5 +66,22 @@ namespace GrantParkCoffeeShop2.Controllers
 
             return RedirectToAction("RoomReservations");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ClearRoomReservation(RoomReservation reservation)
+        {
+            var roomReservation =
+                from r in _context.RoomReservations
+                where r.Customer == reservation.Customer
+                select r;
+
+            if(reservation != null)
+            {
+                _context.RoomReservations.Remove(reservation);
+            }
+            _context.SaveChanges();
+            return RedirectToAction("RoomReservations");
+        }
+
     }
 }
