@@ -7,49 +7,49 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
 
-
-<div class="=row">
-    <h5>Order Number: @Model.OrderNumber</h5>
-    <h5>Order Date: @Model.Date</h5>
-    <h5>Status: @Model.Status</h5>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th class="text-right">Price</th>
-                <th>Quantity</th>
-                <th class="text-right">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in Model.OrderLines)
-            {
+    <div class="=row">
+        <h5>Order Number: @Model.OrderNumber</h5>
+        <h5>Order Date: @Model.Date</h5>
+        <h5>Status: @Model.Status</h5>
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td class="text-left">@line.Product.Name</td>
-                    <td class="text-right">@line.Product.UnitPrice.ToString("c")</td>
-                    <td class="text-center">
-                        <a class="glyphicon" style="font-size:15px; margin-right:5px; text-decoration:none; border:thin; padding:3px;" href="@Url.Action("Decrement", "Order", new{orderId=Model.Id, orderLineId= line.Id})">-</a>
-                        @line.Quantity
-                        <a style="font-size:15px; margin-left:5px; text-decoration:none; border:thin; padding:3px;" href="@Url.Action("Increment", "Order", new{orderId=Model.Id, orderLineId= line.Id})">+</a>
-                    </td>
+                    <th>Product</th>
+                    <th class="text-right">Price</th>
+                    <th>Quantity</th>
+                    <th class="text-right">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.OrderLines)
+                {
+                    <tr>
+                        <td class="text-left">@line.Product.Name</td>
+                        <td class="text-right">@line.Product.UnitPrice.ToString("c")</td>
+                        <td class="text-center">
+                            <a class="glyphicon" style="font-size:15px; margin-right:5px; text-decoration:none; border:thin; padding:3px;" href="@Url.Action("Decrement", "Order", new{orderId=Model.Id, orderLineId= line.Id})">-</a>
+                            @line.Quantity
+                            <a style="font-size:15px; margin-left:5px; text-decoration:none; border:thin; padding:3px;" href="@Url.Action("Increment", "Order", new{orderId=Model.Id, orderLineId= line.Id})">+</a>
+                        </td>
+                        <td class="text-right">
+                            @((line.Quantity * line.UnitPrice).ToString("c"))
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total:</td>
                     <td class="text-right">
-                        @((line.Quantity * line.UnitPrice).ToString("c"))
+                        @Model.OrderLines.Sum(x => (x.UnitPrice * x.Quantity)).ToString("c")
                     </td>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Total:</td>
-                <td class="text-right">
-                    @Model.OrderLines.Sum(x => (x.UnitPrice * x.Quantity)).ToString("c")
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
-
+            </tfoot>
+        </table>
+    </div>
+</body>
 @*<div class="cod-md-12">
         <a href="@Url.Action("Update", "Order", new{id=Model.Id})">Update</a>
     </div>*@

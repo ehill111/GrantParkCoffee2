@@ -8,37 +8,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Make Room Reservation</h1>
+<body>
+    <h1>Make Room Reservation</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="MakeRoomReservation">
-            <h6 style="color:red;">@ViewData["Error"]</h6>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="MakeRoomReservation">
+                <h6 style="color:red;">@ViewData["Error"]</h6>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ClearRoomReservation">
-            <h6 style="color:red;">@ViewData["Error"]</h6>
-            <div class="form-group">
-                <input type="submit" value="Delete" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="ClearRoomReservation">
+                <h6 style="color:red;">@ViewData["Error"]</h6>
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="RoomReservations">Back Room Reservations</a>
-</div>
+    <div>
+        <a asp-action="RoomReservations">Back Room Reservations</a>
+    </div>
 
+</body>

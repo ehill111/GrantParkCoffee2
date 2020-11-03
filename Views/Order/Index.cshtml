@@ -8,53 +8,55 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
+    <h2>Your Order History</h2>
+    <br />
 
-<h2>Your Order History</h2>
-<br />
-
-@foreach (var order in Model.OrderByDescending(x => x.Date))
-{
-    <div class="=row">
-        <h5>Order Number: @order.OrderNumber</h5>
-        <h5>Order Date: @order.Date</h5>
-        <h5>Status: @order.Status</h5>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th class="text-right">Price</th>
-                    <th>Quantity</th>
-                    <th class="text-right">Subtotal</th>
-                    @if (order.Status == OrderStatus.Placed)
-                    {
-                        <th>
-                            <a href="@Url.Action("Edit", "Order", new{id = order.Id})">Make Changes</a>
-                        </th>
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var line in order.OrderLines)
-                {
+    @foreach (var order in Model.OrderByDescending(x => x.Date))
+    {
+        <div class="=row">
+            <h5>Order Number: @order.OrderNumber</h5>
+            <h5>Order Date: @order.Date</h5>
+            <h5>Status: @order.Status</h5>
+            <table class="table table-bordered table-striped">
+                <thead>
                     <tr>
-                        <td class="text-left">@line.Product.Name</td>
-                        <td class="text-right">@line.Product.UnitPrice.ToString("c")</td>
-                        <td class="text-center">@line.Quantity</td>
+                        <th>Product</th>
+                        <th class="text-right">Price</th>
+                        <th>Quantity</th>
+                        <th class="text-right">Subtotal</th>
+                        @if (order.Status == OrderStatus.Placed)
+                        {
+                            <th>
+                                <a href="@Url.Action("Edit", "Order", new{id = order.Id})">Make Changes</a>
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in order.OrderLines)
+                    {
+                        <tr>
+                            <td class="text-left">@line.Product.Name</td>
+                            <td class="text-right">@line.Product.UnitPrice.ToString("c")</td>
+                            <td class="text-center">@line.Quantity</td>
+                            <td class="text-right">
+                                @((line.Quantity * line.UnitPrice).ToString("c"))
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Total:</td>
                         <td class="text-right">
-                            @((line.Quantity * line.UnitPrice).ToString("c"))
+                            @order.OrderLines.Sum(x => (x.UnitPrice * x.Quantity)).ToString("c")
                         </td>
                     </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right">Total:</td>
-                    <td class="text-right">
-                        @order.OrderLines.Sum(x => (x.UnitPrice * x.Quantity)).ToString("c")
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    <br />
-}
+                </tfoot>
+            </table>
+        </div>
+        <br />
+    }
+
+</body>
