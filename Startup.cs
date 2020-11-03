@@ -149,7 +149,7 @@ namespace GrantParkCoffeeShop2
                 {
                     Name = "Bacon, Egg, and Cheese Croissant",
                     Description = "Available with pork or turkey bacon.",
-                    Image = "~/images/baconEggCheese.jpg",
+                    Image = "images/baconEggCheese.jpg",
                     UnitPrice = 6.99,
                     Featured = false,
                     RewardEligible = true,
